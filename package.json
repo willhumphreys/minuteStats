@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/willhumphreys/minuteStats/issues"
   },
-  "homepage": "https://github.com/willhumphreys/minuteStats#readme"
+  "homepage": "https://github.com/willhumphreys/minuteStats#readme",
+  "dependencies": {
+    "csv-parser": "^2.1.0",
+    "minimist": "^1.2.0"
+  }
 }
