@@ -1,0 +1,22 @@
+{
+  "name": "minutestats",
+  "version": "1.0.0",
+  "description": "Some simple stats on descriptions",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willhumphreys/minuteStats.git"
+  },
+  "keywords": [
+    "stats"
+  ],
+  "author": "Will Humphreys",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/willhumphreys/minuteStats/issues"
+  },
+  "homepage": "https://github.com/willhumphreys/minuteStats#readme"
+}
