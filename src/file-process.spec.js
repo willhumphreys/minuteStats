@@ -2,7 +2,6 @@ import { execute } from './file-processor';
 import { readFile } from 'fs';
 const fs = require('fs');
 
-
 test('execute process', async () => {
 
     const result = await execute('test-data/AUDUSD.csv', 'test-out/AUDUSD.csv');
@@ -20,15 +19,9 @@ test('execute process', async () => {
 
     const data = fs.readFileSync('test-out/AUDUSD.csv', 'utf8');
 
-
     const lines = data.split('\n');
 
-
-
     expect(lines.length).toBe(6);
-
-    console.log(lines);
-
     lines.map((line, index) => expect(line).toBe(expectedLines[index]));
 
 })

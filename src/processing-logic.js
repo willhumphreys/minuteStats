@@ -7,7 +7,7 @@ export const timeDiff = (startDate, endDate) => {
         const timeDiff = Math.abs(startDate.getTime() - endDate.getTime());
 
         if (timeDiff > ONE_HOUR) {
-            console.log(`Invalid gap ${timeDiff} previous ${startDate.toISOString()} current ${currentDate.toISOString()}`);
+            console.log(`Invalid gap ${timeDiff} previous ${startDate.toISOString()} current ${endDate.toISOString()}`);
             return true;
         }
         return false;

@@ -1,6 +1,6 @@
 const csv = require('csv-parser')
 const fs = require('fs')
-import { timeDiff } from './processingLogic'
+import { timeDiff } from './processing-logic'
 
 export const execute = (input, out) => {
 
