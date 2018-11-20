@@ -4,6 +4,7 @@ import { timeDiff } from './processing-logic'
 
 export const execute = (input, out) => {
 
+    console.log(`running with ${input} and ${out}`)
     const results = [];
 
     let existing = 1000;
@@ -19,7 +20,6 @@ export const execute = (input, out) => {
     const read = fs.createReadStream(input)
         .pipe(csv())
         .on('data', (line) => {
-
             const currentDate = new Date(line.dateTime + 'Z');
 
             const current = currentDate.getMinutes() % 15;
