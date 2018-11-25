@@ -1,6 +1,6 @@
 import { timeDiff } from './processing-logic';
 
-describe('timeDiff tests', () => {
+describe('timeDiff', () => {
     it('timeDiff is not invalid if date is within one hour', () => {
 
         const date = new Date('1995-12-17T03:24:00');
