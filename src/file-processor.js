@@ -1,17 +1,12 @@
 const csv = require('csv-parser')
 const fs = require('fs')
-import { timeDiff } from './processing-logic'
+import { processLine } from './line-processor'
 
 export const execute = (input, out) => {
 
     console.log(`running with ${input} and ${out}`)
-    const results = [];
 
-    let existing = 1000;
-    let currentOpen = 0;
-    let bestLow = 0;
-    let bestHigh = 0;
-    let startDate = null;
+
 
     const file = fs.createWriteStream(out);
 
@@ -20,39 +15,12 @@ export const execute = (input, out) => {
     const read = fs.createReadStream(input)
         .pipe(csv())
         .on('data', (line) => {
-            const currentDate = new Date(line.dateTime + 'Z');
+            const { newLine } = processLine(line, 15);
 
-            const current = currentDate.getMinutes() % 15;
-
-            if (current < existing) {
-
-                const invalid = timeDiff(startDate, currentDate);
-
-
-                if (!invalid && startDate != null) {
-                    file.write(`\n${startDate.toISOString()},${bestLow},${bestHigh}`);
-                }
-
-                currentOpen = line.open;
-                bestLow = 0;
-                bestHigh = 0;
-                startDate = currentDate;
-
+            if (newLine !== null) {
+                file.write(newLine);
             }
 
-            const potentialNewLow = Math.abs(line.open - line.low);
-
-            if (potentialNewLow > bestLow) {
-                bestLow = potentialNewLow;
-            }
-
-            const potentialNewHigh = Math.abs(line.open - line.high);
-
-            if (potentialNewHigh > bestHigh) {
-                bestHigh = potentialNewHigh
-            }
-
-            existing = current;
         })
 
     const end = new Promise(function (resolve, reject) {
@@ -62,9 +30,11 @@ export const execute = (input, out) => {
             });
 
         });
-        read.on('error', reject); // or something like that
+        read.on('error', reject);
     });
 
     return end;
 }
+
+
 

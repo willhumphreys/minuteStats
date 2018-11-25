@@ -2,4 +2,4 @@
 echo 'process csv'
 npm start
 echo 'generate graphs'
-Rscript stats.r
+Rscript stats.r AUDUSD
