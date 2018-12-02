@@ -13,7 +13,9 @@ test('execute process', async () => {
         '2001-01-02T23:15:00.000Z,1000,2000',
         '2001-01-02T23:33:00.000Z,1000,2000',
         '2001-01-02T23:46:00.000Z,1000,2000',
-        '2001-01-03T00:01:00.000Z,1000,2000']
+        '2001-01-03T00:01:00.000Z,1000,2000',
+        '2001-01-03T00:16:00.000Z,1000,2000'
+    ]
 
     const input = 'test-out/AUDUSD.csv';
 
@@ -21,7 +23,7 @@ test('execute process', async () => {
 
     const lines = data.split('\n');
 
-    expect(lines.length).toBe(6);
+    expect(lines.length).toBe(7);
     lines.map((line, index) => expect(line).toBe(expectedLines[index]));
 
 })

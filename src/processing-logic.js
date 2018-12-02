@@ -1,7 +1,7 @@
 
 const ONE_HOUR = 1000 * 60 * 60;
 
-export const timeDiff = (startDate, endDate) => {
+export const invalidGap = (startDate, endDate) => {
 
     if (startDate != null) {
         const timeDiff = Math.abs(startDate.getTime() - endDate.getTime());

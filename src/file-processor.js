@@ -6,8 +6,6 @@ export const execute = (input, out) => {
 
     console.log(`running with ${input} and ${out}`)
 
-
-
     const file = fs.createWriteStream(out);
 
     file.write('date,bestLow,bestHigh');
@@ -15,10 +13,10 @@ export const execute = (input, out) => {
     const read = fs.createReadStream(input)
         .pipe(csv())
         .on('data', (line) => {
-            const { newLine } = processLine(line, 15);
+            const record = processLine(line, 15);
 
-            if (newLine !== null) {
-                file.write(newLine);
+            if (record.live === true) {
+                file.write(`\n${record.lastDate.toISOString()},${record.bestLow},${record.bestHigh}`);
             }
 
         })
