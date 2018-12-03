@@ -1,14 +1,13 @@
 import 'dotenv/config';
 import { execute } from './file-processor';
 
-
 const argv = require('minimist')(process.argv.slice(2));
-console.dir(argv);
 
-console.log(argv.timePeriod);
+const input = `data/${argv.symbol}.csv`;
+const output = `out/${argv.symbol}-OUT.csv`;
 
 async function go() {
-    return await execute(argv.in, argv.out, argv.timePeriod);
+    return await execute(input, output, argv.timePeriod);
 }
 
 const result = go();

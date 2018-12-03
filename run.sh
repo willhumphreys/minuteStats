@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-echo "Running script with $1 $2 $3"
+echo "Running script with $1 $2"
 
 echo 'process csv'
-npm start -- $1 $2 $3
+npm start -- $1 $2
 echo 'generate graphs'
-Rscript stats.r $1 $3
+Rscript stats.r $1 $2

@@ -2,25 +2,26 @@ library(plyr)
 library(ggplot2)
 library(reshape)
 library(scales)
+library(argparse)
 
+parser <- ArgumentParser()
 
-args <- commandArgs(trailingOnly = TRUE)
+parser$add_argument("-s", "--symbol", help="The symbol to use")
+parser$add_argument("-t", "--timePeriod", help="The timePeriod to use")
 
-symbol <- args[1]
+args <- parser$parse_args()
 
-symbol='AUDUSD'
+symbol <- args$symbol
+timePeriod <- args$timePeriod
 
-print(sprintf("Running with Symbol %s", symbol))
+print(sprintf("Running with Symbol %s and timePeriod %s", symbol, timePeriod))
 
 input <- 'out'
 file.name <- paste(symbol,'-OUT.csv', sep="")
 data.path <- file.path(input, file.name)
 data <- read.table(data.path, header=T,sep=",")
 
-
-
 highRow <- data[which.max(data$bestHigh),]
-
 lowRow <- data[which.max(data$bestLow),]
 
 print(sprintf("bestLow %s %s", lowRow$date, lowRow$bestLow))
@@ -48,11 +49,11 @@ p <- ggplot(data=meltedFrequencies, aes(x=ticks, y=frequency, fill=direction)) +
 geom_bar(stat="identity") +
 scale_y_log10(breaks = scales::trans_breaks("log10", function(x) 10^x), labels = scales::trans_format("log10", scales::math_format(10^.x))) +
 scale_x_continuous(breaks=seq(0,100,5)) +
-ggtitle(paste('Expected Ticks'))
+ggtitle(paste('Expected Ticks ', symbol, timePeriod))
 
 dir.create('graphs')
 
-output <- file.path('graphs', paste(symbol, '.png', sep=""))
+output <- file.path('graphs', paste(symbol, '-', timePeriod, '.png', sep=""))
 
 ggsave(output, p, device='png')
 
