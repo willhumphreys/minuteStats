@@ -4,7 +4,7 @@ const fs = require('fs');
 
 test('execute process', async () => {
 
-    const result = await execute('test-data/AUDUSD.csv', 'test-out/AUDUSD.csv');
+    const result = await execute('test-data/AUDUSD.csv', 'test-out/AUDUSD.csv', 15);
 
     expect(result).toBe('complete');
 
