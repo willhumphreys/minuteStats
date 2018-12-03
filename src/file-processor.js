@@ -2,9 +2,9 @@ const csv = require('csv-parser')
 const fs = require('fs')
 import { processLine } from './line-processor'
 
-export const execute = (input, out) => {
+export const execute = (input, out, timePeriod) => {
 
-    console.log(`running with ${input} and ${out}`)
+    console.log(`running with input: ${input} output: ${out} and timePeriod: ${timePeriod}`)
 
     const file = fs.createWriteStream(out);
 
@@ -13,7 +13,7 @@ export const execute = (input, out) => {
     const read = fs.createReadStream(input)
         .pipe(csv())
         .on('data', (line) => {
-            const record = processLine(line, 15);
+            const record = processLine(line, timePeriod);
 
             if (record.live === true) {
                 file.write(`\n${record.lastDate.toISOString()},${record.bestLow},${record.bestHigh}`);
